@@ -9,8 +9,9 @@ import { Separator } from "@/components/ui/separator";
 import logoPng from "@/assets/logo.png";
 
 export default function DownloadPage() {
-  const [, params] = useRoute("/cert/:id");
-  const id = params?.id || "";
+  const [, certParams] = useRoute("/cert/:id");
+  const [, shortParams] = useRoute("/:id");
+  const id = certParams?.id || shortParams?.id || "";
   const { data, isLoading } = useCertificate(id);
 
   // Loading State

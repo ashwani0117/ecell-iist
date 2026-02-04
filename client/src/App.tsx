@@ -12,6 +12,7 @@ function Router() {
     <Switch>
       {/* Secure Certificate Route */}
       <Route path="/cert/:id" component={DownloadPage} />
+      <Route path="/:id" component={DownloadPage} />
       
       {/* Root - Generic Access Denied Message */}
       <Route path="/" component={LandingPage} />
