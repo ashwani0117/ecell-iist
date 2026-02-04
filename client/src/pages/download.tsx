@@ -1,11 +1,12 @@
 import { useRoute } from "wouter";
 import { useCertificate } from "@/hooks/use-certificate";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, Download, FileText, ShieldCheck, AlertCircle } from "lucide-react";
+import { Loader2, Download, FileText, ShieldCheck, AlertCircle, Info } from "lucide-react";
 import { VerificationBadge } from "@/components/verification-badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import logoPng from "@/assets/logo.png";
 
 export default function DownloadPage() {
   const [, params] = useRoute("/cert/:id");
@@ -64,10 +65,27 @@ export default function DownloadPage() {
 
   // Success State
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden bg-slate-50/50">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/80 to-transparent -z-10" />
       
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8 flex flex-col items-center text-center space-y-4"
+      >
+        <img src={logoPng} alt="E-Cell Logo" className="w-24 h-24 object-contain" />
+        <div className="space-y-1">
+          <h1 className="text-2xl font-bold text-gray-900">Entrepreneurship Cell – Certificate Portal</h1>
+          <p className="text-blue-600 font-medium tracking-wide text-sm uppercase">
+            Empowering innovation. Recognizing participation.
+          </p>
+          <p className="text-muted-foreground text-sm">
+            Securely download your official event certificate below.
+          </p>
+        </div>
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -79,14 +97,22 @@ export default function DownloadPage() {
           <div className="p-8 pb-6 flex flex-col items-center text-center space-y-6">
             <VerificationBadge />
             
-            <div className="space-y-1">
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
-                Authorized Recipient
-              </h3>
-              <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
-                {data.name}
-              </h1>
+            <div className="space-y-2">
+              <h2 className="text-xl font-bold text-gray-900">Welcome to the Official Certificate Distribution Portal</h2>
+              <div className="space-y-1">
+                <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                  Authorized Recipient
+                </h3>
+                <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+                  {data.name}
+                </h1>
+              </div>
             </div>
+            
+            <p className="text-sm text-gray-600 max-w-sm leading-relaxed">
+              This portal is designed to provide participants with secure and seamless access to their event certificates. 
+              Each certificate is digitally verified and issued by the Entrepreneurship Cell.
+            </p>
           </div>
 
           <Separator className="opacity-50" />
@@ -105,25 +131,39 @@ export default function DownloadPage() {
               </div>
             </div>
 
-            <Button 
-              className="w-full h-14 text-lg font-semibold shadow-lg shadow-primary/25 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0 active:shadow-md"
-              size="lg"
-              onClick={() => {
-                const link = document.createElement('a');
-                link.href = `/certificates/${data.file}`;
-                link.download = data.file;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
-            >
-              <Download className="mr-2 w-5 h-5" />
-              Download Certificate
-            </Button>
+            <div className="space-y-4">
+              <Button 
+                className="w-full h-14 text-lg font-semibold shadow-lg shadow-primary/25 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0 active:shadow-md"
+                size="lg"
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = `/certificates/${data.file}`;
+                  link.download = data.file;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+              >
+                <Download className="mr-2 w-5 h-5" />
+                Download Certificate
+              </Button>
+              
+              <div className="p-4 bg-blue-50/50 rounded-lg border border-blue-100 space-y-2">
+                <div className="flex items-center gap-2 text-blue-800 font-semibold text-sm">
+                  <ShieldCheck className="w-4 h-4" />
+                  Security Notice
+                </div>
+                <p className="text-xs text-blue-700 leading-relaxed">
+                  Your certificate is accessible only through your unique private link. 
+                  For privacy and authenticity reasons, links are non-transferable. 
+                  Please do not share your access link with others.
+                </p>
+              </div>
+            </div>
             
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Secure, encrypted download link</span>
+              <Info className="w-3.5 h-3.5" />
+              <span>If you face any issues, contact the organizing team.</span>
             </div>
           </div>
           
