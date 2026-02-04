@@ -16,7 +16,7 @@ export default function DownloadPage() {
   // Loading State
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 sm:py-14 bg-background">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -35,26 +35,26 @@ export default function DownloadPage() {
   // Not Found / Invalid State
   if (!data) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-red-50/30">
+      <div className="min-h-screen flex items-center justify-center px-4 py-10 sm:py-14 bg-background">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
+          className="w-full max-w-sm sm:max-w-md"
         >
-          <Card className="p-8 border-red-100 shadow-lg shadow-red-100/50 bg-white text-center space-y-6">
-            <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
-              <AlertCircle className="w-8 h-8 text-red-600" />
+          <Card className="p-8 border-border shadow-lg shadow-red-500/10 bg-secondary/80 text-center space-y-6">
+            <div className="mx-auto w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center">
+              <AlertCircle className="w-8 h-8 text-red-400" />
             </div>
             
             <div className="space-y-2">
-              <h1 className="text-2xl font-bold text-gray-900">Invalid Link</h1>
-              <p className="text-gray-500">
+              <h1 className="text-2xl font-bold text-foreground">Invalid Link</h1>
+              <p className="text-muted-foreground">
                 The certificate link you are trying to access is invalid, expired, or does not exist.
               </p>
             </div>
 
-            <div className="text-xs text-gray-400 uppercase tracking-widest pt-4 border-t border-gray-100">
+            <div className="text-xs text-muted-foreground uppercase tracking-widest pt-4 border-t border-border">
               Security Alert System
             </div>
           </Card>
@@ -65,22 +65,26 @@ export default function DownloadPage() {
 
   // Success State
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden bg-slate-50/50">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/80 to-transparent -z-10" />
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 sm:py-14 relative overflow-hidden bg-background">
       
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 flex flex-col items-center text-center space-y-4"
+        className="mb-6 sm:mb-8 flex flex-col items-center text-center space-y-3 sm:space-y-4"
       >
-        <img src={logoPng} alt="E-Cell Logo" className="w-24 h-24 object-contain" />
+        <img
+          src={logoPng}
+          alt="E-Cell Logo"
+          className="w-20 h-20 sm:w-28 sm:h-28 object-contain drop-shadow-[0_0_20px_rgba(99,102,241,0.45)]"
+        />
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold text-gray-900">Entrepreneurship Cell – Certificate Portal</h1>
-          <p className="text-blue-600 font-medium tracking-wide text-sm uppercase">
+          <h1 className="text-lg sm:text-2xl font-bold text-foreground leading-snug">
+            Entrepreneurship Cell – Certificate Portal
+          </h1>
+          <p className="text-primary font-medium tracking-wide text-xs sm:text-sm uppercase">
             Empowering innovation. Recognizing participation.
           </p>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-xs sm:text-sm">
             Securely download your official event certificate below.
           </p>
         </div>
@@ -90,26 +94,28 @@ export default function DownloadPage() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-lg relative z-10"
+        className="w-full max-w-sm sm:max-w-lg relative z-10"
       >
-        <Card className="overflow-hidden border-border/50 shadow-2xl shadow-blue-900/5 bg-white">
+        <Card className="overflow-hidden border-border/50 shadow-2xl shadow-black/30 bg-secondary/85 backdrop-blur">
           {/* Header Section */}
-          <div className="p-8 pb-6 flex flex-col items-center text-center space-y-6">
+          <div className="p-6 sm:p-8 pb-5 sm:pb-6 flex flex-col items-center text-center space-y-5 sm:space-y-6">
             <VerificationBadge />
             
             <div className="space-y-2">
-              <h2 className="text-xl font-bold text-gray-900">Welcome to the Official Certificate Distribution Portal</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-foreground">
+                Welcome to the Official Certificate Distribution Portal
+              </h2>
               <div className="space-y-1">
                 <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
                   Authorized Recipient
                 </h3>
-                <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+                <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground tracking-tight">
                   {data.name}
                 </h1>
               </div>
             </div>
             
-            <p className="text-sm text-gray-600 max-w-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted-foreground max-w-sm leading-relaxed">
               This portal is designed to provide participants with secure and seamless access to their event certificates. 
               Each certificate is digitally verified and issued by the Entrepreneurship Cell.
             </p>
@@ -118,14 +124,14 @@ export default function DownloadPage() {
           <Separator className="opacity-50" />
 
           {/* Details Section */}
-          <div className="p-8 pt-6 space-y-8">
-            <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 flex items-start gap-4">
-              <div className="p-3 bg-white rounded-lg shadow-sm border border-slate-100">
+          <div className="p-6 sm:p-8 pt-5 sm:pt-6 space-y-6 sm:space-y-8">
+            <div className="bg-background/60 rounded-xl p-5 sm:p-6 border border-border flex items-start gap-3 sm:gap-4">
+              <div className="p-2.5 sm:p-3 bg-secondary rounded-lg shadow-sm border border-border">
                 <FileText className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900">Certificate of Completion</h4>
-                <p className="text-sm text-gray-500 mt-1">
+                <h4 className="font-semibold text-foreground">Certificate of Completion</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   Secure PDF Format • Signed & Verified
                 </p>
               </div>
@@ -133,7 +139,7 @@ export default function DownloadPage() {
 
             <div className="space-y-4">
               <Button 
-                className="w-full h-14 text-lg font-semibold shadow-lg shadow-primary/25 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0 active:shadow-md"
+                className="w-full h-12 sm:h-14 text-base sm:text-lg font-semibold shadow-lg shadow-primary/25 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0 active:shadow-md"
                 size="lg"
                 onClick={() => {
                   const link = document.createElement('a');
@@ -148,12 +154,12 @@ export default function DownloadPage() {
                 Download Certificate
               </Button>
               
-              <div className="p-4 bg-blue-50/50 rounded-lg border border-blue-100 space-y-2">
-                <div className="flex items-center gap-2 text-blue-800 font-semibold text-sm">
+              <div className="p-3 sm:p-4 bg-primary/10 rounded-lg border border-primary/20 space-y-2">
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs sm:text-sm">
                   <ShieldCheck className="w-4 h-4" />
                   Security Notice
                 </div>
-                <p className="text-xs text-blue-700 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-primary/80 leading-relaxed">
                   Your certificate is accessible only through your unique private link. 
                   For privacy and authenticity reasons, links are non-transferable. 
                   Please do not share your access link with others.
@@ -168,8 +174,8 @@ export default function DownloadPage() {
           </div>
           
           {/* Footer ID Display */}
-          <div className="bg-slate-50 p-4 text-center border-t border-slate-100">
-             <p className="text-xs font-mono text-slate-400">
+           <div className="bg-background/60 p-3 sm:p-4 text-center border-t border-border">
+             <p className="text-[11px] sm:text-xs font-mono text-muted-foreground">
                ID: {data.id}
              </p>
           </div>
